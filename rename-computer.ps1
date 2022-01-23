@@ -1,4 +1,6 @@
 $clientName = "Client"
+$chassisType = (Get-WmiObject -Class Win32_SystemEnclosure | Select-Object ChassisType)
+$serialNumber = Get-WmiObject win32_bios | Select-Object -expand serialnumber
 function sanitizeName($computerName){
     $clearSpaces = $computerName.trim()
     if($clearSpaces.length -gt 15){
