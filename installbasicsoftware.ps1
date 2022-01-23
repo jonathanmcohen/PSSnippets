@@ -83,5 +83,3 @@ DownloadInstall $7zipFileName $7zipURI $7zipArguments
 DownloadInstall $vlcFileName $vlcURI $vlcArguments
 DownloadInstall $zoomFileName $zoomURI $zoomArguments
 DownloadInstall $javaFileName $javaURI $javaArguments
-
-Pause
