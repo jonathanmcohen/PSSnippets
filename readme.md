@@ -17,5 +17,4 @@ Installs basic software VLC, 7-zip, Google Chrome, Java, Zoom & Adobe Reader.
 Renames and Sanitizes the name in the following format:
 
 - **Desktop**: Client-PC-SerialNumber
-
 - **Laptop**: Client-LT-SerialNumber
