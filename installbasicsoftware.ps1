@@ -4,7 +4,9 @@ $arVersion = [regex]::match($arWeb.Content,'Version ([\d\.]+)').Groups[1].Value.
 $vlcWeb = Invoke-WebRequest -Uri "https://www.videolan.org/vlc/download-windows.html" -UseBasicParsing
 $vlcVersion = [regex]::match($vlcWeb.Content,'\d\.\d\.\d\d').Value.Trim()
 $zoomWeb = Invoke-WebRequest "https://zoom.us/download" -UseBasicParsing
-$zoomVersion = [regex]::match($zoomWeb.Content,'\d\.\d\.\d\s\(\d\d\d\)').Value.Trim().replace('(','.').replace(')','').replace(' ', '')
+$zoomVersion = [regex]::match($zoomWeb.Content,'\d\.\d\.\d\s\(\d\d\d\d\)').Value.Trim().replace('(','.').replace(')','').replace(' ', '')
+$7zWeb = Invoke-WebRequest "https://www.7-zip.org/download.html" -UseBasicParsing
+$7zVersion = [regex]::match($7zWeb.Content,'\d\d.\d\d').value.replace(".","")
 $arURLPrefix = "https://ardownload2.adobe.com/pub/adobe/reader/win/AcrobatDC/$arVersion/"
 $7zipURLPrefix = "https://www.7-zip.org/a/"
 $vlcURLPrefix = "https://get.videolan.org/vlc/" + $vlcVersion + "/win32/"
@@ -45,7 +47,7 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 
 $chromeFileName = "googlechromestandaloneenterprise.msi"
 $arFileName = "AcroRdrDC" + $arVersion + "_en_US.exe"
-$7zipFileName = "7z1900.msi"
+$7zipFileName = "7z" + $7zVersion + ".msi"
 $vlcFileName = "vlc-" + $vlcVersion + "-win32.msi"
 $zoomFileName = "ZoomInstallerFull.msi"
 $javaFileName = "OpenJDK11U-jre_x86-32_windows_hotspot_11.0.11_9.msi"
@@ -55,7 +57,7 @@ if([Environment]::Is64BitOperatingSystem){
     $zoomURLPrefix = "https://cdn.zoom.us/prod/" + $zoomVersion + "/x64/"
     $chromeFileName = "googlechromestandaloneenterprise64.msi"
     $arFileName = "AcroRdrDC" + $arVersion + "_en_US.exe"
-    $7zipFileName = "7z1900-x64.msi"
+    $7zipFileName = "7z" + $7zVersion +"-x64.msi"
     $vlcFileName = "vlc-" + $vlcVersion + "-win64.msi"
     $zoomFileName = "ZoomInstallerFull.msi"
     $javaFileName = "OpenJDK11U-jre_x64_windows_hotspot_11.0.11_9.msi"
@@ -81,3 +83,5 @@ DownloadInstall $7zipFileName $7zipURI $7zipArguments
 DownloadInstall $vlcFileName $vlcURI $vlcArguments
 DownloadInstall $zoomFileName $zoomURI $zoomArguments
 DownloadInstall $javaFileName $javaURI $javaArguments
+
+Pause
