@@ -1,10 +1,13 @@
 $chromeURLPrefix = "https://dl.google.com/chrome/install/"
-$arWeb = Invoke-WebRequest -Uri 'https://get.adobe.com/reader/' -UseBasicParsing
-$arVersion = [regex]::match($arWeb.Content,'Version ([\d\.]+)').Groups[1].Value.Substring(2).replace('.','')
+#$arWeb = Invoke-WebRequest -Uri 'https://get.adobe.com/reader/' -UseBasicParsing
+$arVersion = "2200120117"
+#$arVersion = [regex]::match($arWeb.Content,'Version \d\d\.\d\d\d\.\d\d\d\d\d').Groups[1].Value.Substring(2).replace('.','')
+#$arVersion = [regex]::match($arWeb.Content,'Version ([\d\.]+)').Groups[1].Value.Substring(2).replace('.','')
 $vlcWeb = Invoke-WebRequest -Uri "https://www.videolan.org/vlc/download-windows.html" -UseBasicParsing
 $vlcVersion = [regex]::match($vlcWeb.Content,'\d\.\d\.\d\d').Value.Trim()
-$zoomWeb = Invoke-WebRequest "https://zoom.us/download" -UseBasicParsing
-$zoomVersion = [regex]::match($zoomWeb.Content,'\d\.\d\.\d\s\(\b\d{1,4}\b)').Value.Trim().replace('(','.').replace(')','').replace(' ', '')
+#$zoomWeb = Invoke-WebRequest "https://zoom.us/download" -UseBasicParsing
+$zoomVersion = "5.10.4.5035"
+#$zoomVersion = [regex]::match($zoomWeb.Content,'\d\.\d{1,2}\.\d\.\d\s\(\b\d{1,4}\b)').Value.Trim().replace('(','.').replace(')','').replace(' ', '')
 $7zWeb = Invoke-WebRequest "https://www.7-zip.org/download.html" -UseBasicParsing
 $7zVersion = [regex]::match($7zWeb.Content,'\d\d.\d\d').value.replace(".","")
 $arURLPrefix = "https://ardownload2.adobe.com/pub/adobe/reader/win/AcrobatDC/$arVersion/"
